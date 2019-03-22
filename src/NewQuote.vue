@@ -34,6 +34,7 @@
         align-items: center;
         flex-flow: column;
         margin-top: 20px;
+        margin-left: 65px;
     }
 
     textarea {

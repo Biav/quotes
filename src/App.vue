@@ -1,13 +1,15 @@
 <template>
     <div class="container">
+        <headerQuotes :totalQuotes="totalQuotes()"></headerQuotes>
         <new-quote @addQuote="addQuote"></new-quote>
-        <quotes :quotes="quotes"></quotes>
+        <quotes :quotes="quotes" @deleteQuote="deleteQuote"></quotes>
     </div>
 </template>
 
 <script>
     import NewQuote from "./NewQuote.vue";
     import Quotes from "./Quotes.vue";
+    import Header from "./Header.vue";
 
     export default {
         data: function() {
@@ -18,15 +20,21 @@
         },
         methods: {
             addQuote(quote) {
-                console.log((this.quotes).length);
-                if(this.quotes.length < this.maxQuotes) {
+                if(this.totalQuotes() < this.maxQuotes) {
                     this.quotes.push(quote);
                 }
+            },
+            totalQuotes() {
+                return this.quotes.length;
+            },
+            deleteQuote(index) {
+                this.quotes.splice(index, 1);
             }
         },
         components: {
              'new-quote': NewQuote,
-             quotes: Quotes 
+             quotes: Quotes, 
+             headerQuotes: Header 
         }
     }
 </script>
